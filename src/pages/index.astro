@@ -1,8 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
 
+// Knownwise fix meta.title_length: 20-70 chars, topic front-loaded; the
+// title is the strongest grounding signal for what a page is about.
 const title =
-  "Larchsend — Email Marketing Software, Newsletters & Automations for Small Businesses";
+  "Email Marketing Software for Small Businesses — Larchsend";
 const description =
   "Larchsend is email marketing for small businesses: newsletters, automations and signup forms that small teams set up in an afternoon.";
 
@@ -35,7 +37,9 @@ const pageJsonLd = JSON.stringify(pageSchema).replace(/</g, "\\u003c");
     <p>Larchsend gives small teams newsletters, welcome sequences and signup forms without an agency or a week of setup.</p>
     <img src="/hero.svg" />
   </section>
-  <h1>Why small teams pick Larchsend</h1>
+  <!-- Knownwise fix semantic.h1_count: one h1 per page states the topic; this
+       section heading is a sublevel, so it demotes to h2. -->
+  <h2>Why small teams pick Larchsend</h2>
   <ul>
     <li>Templates that look right on phones</li>
     <li>Automations you can read in plain English</li>

@@ -17,7 +17,9 @@ const organizationSchema = {
 // "<" must be escaped so a "</script>" in the payload can't end the block early.
 const organizationJsonLd = JSON.stringify(organizationSchema).replace(/</g, "\\u003c");
 ---
-<html>
+<!-- Knownwise fix a11y.lang_missing: declared language stops models and
+     screen readers from processing the text with wrong defaults. -->
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

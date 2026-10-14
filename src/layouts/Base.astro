@@ -1,5 +1,21 @@
 ---
 const { title, description } = Astro.props;
+
+// Knownwise fix schema.organization_missing: Organization JSON-LD pins the
+// official name, site and logo so AI answer engines don't have to guess.
+// The repo defines no social profile URLs, so sameAs is omitted rather than
+// invented; all values come from the site's own copy and config.
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Larchsend",
+  url: Astro.site?.href,
+  logo: Astro.site ? new URL("/favicon.svg", Astro.site).href : undefined,
+  description:
+    "Email marketing for small businesses: newsletters, automations and signup forms.",
+};
+// "<" must be escaped so a "</script>" in the payload can't end the block early.
+const organizationJsonLd = JSON.stringify(organizationSchema).replace(/</g, "\\u003c");
 ---
 <html>
   <head>
@@ -8,6 +24,7 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <link rel="icon" href="/favicon.svg" />
+    <script type="application/ld+json" set:html={organizationJsonLd} />
     <style>
       body { margin: 0; font-family: system-ui, sans-serif; color: #14110e; background: #faf8f4; line-height: 1.6; }
       header, main, footer { max-width: 920px; margin: 0 auto; padding: 24px; }

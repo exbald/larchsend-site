@@ -1,7 +1,35 @@
 ---
 import Base from "../layouts/Base.astro";
+
+const title =
+  "Larchsend — Email Marketing Software, Newsletters & Automations for Small Businesses";
+const description =
+  "Larchsend is email marketing for small businesses: newsletters, automations and signup forms that small teams set up in an afternoon.";
+
+// Knownwise fix schema.page_type_missing: page-type schema tells models what
+// kind of thing this page is. The home page sells a software product, so the
+// honest type is SoftwareApplication — not the audit's generic Article
+// example. Facts (free tier, contact limits) mirror the /pricing page.
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Larchsend",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description,
+  url: Astro.site?.href,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+    description: "Free plan: up to 1,000 contacts",
+  },
+};
+// "<" must be escaped so a "</script>" in the payload can't end the block early.
+const pageJsonLd = JSON.stringify(pageSchema).replace(/</g, "\\u003c");
 ---
-<Base title="Larchsend — Email Marketing Software, Newsletters & Automations for Small Businesses" description="Larchsend is email marketing for small businesses: newsletters, automations and signup forms that small teams set up in an afternoon.">
+<Base {title} {description}>
+  <script type="application/ld+json" set:html={pageJsonLd} />
   <section class="hero">
     <h1>Email marketing that small businesses actually finish setting up</h1>
     <p>Larchsend gives small teams newsletters, welcome sequences and signup forms without an agency or a week of setup.</p>

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Disallow: /blog
+
+User-agent: PerplexityBot
+Disallow: /blog
+
+Sitemap: https://larchsend.no-code.gdn/sitemap.xml

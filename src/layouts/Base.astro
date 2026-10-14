@@ -1,0 +1,28 @@
+---
+const { title, description } = Astro.props;
+---
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/favicon.svg" />
+    <style>
+      body { margin: 0; font-family: system-ui, sans-serif; color: #14110e; background: #faf8f4; line-height: 1.6; }
+      header, main, footer { max-width: 920px; margin: 0 auto; padding: 24px; }
+      nav a { margin-right: 18px; color: #2f5d50; text-decoration: none; font-weight: 600; }
+      .hero { padding: 56px 0 24px; }
+      .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .plan { border: 1px solid #e6dfd6; border-radius: 12px; padding: 20px; background: #fff; }
+      img { max-width: 100%; border-radius: 12px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav><a href="/">Larchsend</a><a href="/pricing">Pricing</a><a href="/blog">Blog</a></nav>
+    </header>
+    <main><slot /></main>
+    <footer>© 2026 Larchsend · Email marketing for small businesses</footer>
+  </body>
+</html>
